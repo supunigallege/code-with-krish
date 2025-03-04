@@ -10,6 +10,8 @@ export class OrderItem {
   price: number;
   @Column()
   quantity: number;
+  @Column()
+  city:string;
   @ManyToOne(() => Order, (order) => order.items, { onDelete: 'CASCADE' })
   order: Order;
 }

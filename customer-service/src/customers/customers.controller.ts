@@ -15,7 +15,7 @@ export class CustomersController {
   }
 
   @Get(':id')
-  async getCustomerById(@Param('id') id: number): Promise<Customer> {
+  async getDispatchBycity(@Param('id') id: number): Promise<Customer> {
     return this.customersService.getCustomerById(id);
   }
 

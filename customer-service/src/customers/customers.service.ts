@@ -26,7 +26,4 @@ export class CustomersService {
     return customer;
   }
 
-  async getAllCustomers(): Promise<Customer[]> {
-    return this.customerRepository.find();
-  }
 }

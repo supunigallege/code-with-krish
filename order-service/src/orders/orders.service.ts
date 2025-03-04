@@ -12,7 +12,7 @@ import { createOrderDto } from './dto/create-order.dto';
 import { OrderStatus, UpdateOrderStatus } from './dto/update-order.dto';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
-import { Kafka } from 'kafkajs';
+import { Kafka, CompressionTypes } from 'kafkajs';
 @Injectable()
 export class OrdersService implements OnModuleInit{
 
@@ -40,7 +40,7 @@ async onModuleInit() {
 
     await this.consumer.connect();
 
-    await this.consumeComfirmedOrders();
+    
 
   }
   async create(createOrderDto: createOrderDto): Promise<any> {
@@ -157,7 +157,7 @@ async onModuleInit() {
     return await this.orderRepository.save(order);
   }
 
- async consumeComfirmedOrders(){
+ async ComfirmedOrders(){
     await this.consumer.subscribe({topic:'supuni.order-inventory-update'});
     await this.consumer.run({
       eachMessage:async({message})=>{
@@ -192,7 +192,7 @@ async onModuleInit() {
             orderId: savedOrder.id,         
             customerId: customerId,         
             customerName: customerName,    
-            items: item,                    
+            items: item,           
             status: OrderStatus.CONFIRMED,  
           }),
         },
